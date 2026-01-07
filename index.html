@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeu du Tri Sélectif</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e8f5e9;
+    text-align: center;
+    padding: 20px;
+}
+h1 { color: #2e7d32; }
+
+#objet {
+    font-size: 80px;
+    margin: 20px;
+}
+
+.poubelles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 400px;
+    margin: auto;
+}
+
+button {
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+}
+
+.papier { background: #2196f3; }
+.plastique { background: #fbc02d; color: black; }
+.verre { background: #4caf50; }
+.dechets { background: #424242; }
+
+#score {
+    margin-top: 20px;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>♻️ Jeu du Tri Sélectif</h1>
+<p>Clique sur la bonne poubelle</p>
+
+<div id="objet">🧃</div>
+
+<div class="poubelles">
+    <button class="papier" onclick="verifier('papier')">🟦 Papier</button>
+    <button class="plastique" onclick="verifier('plastique')">🟨 Plastique</button>
+    <button class="verre" onclick="verifier('verre')">🟩 Verre</button>
+    <button class="dechets" onclick="verifier('dechets')">⬛ Déchets</button>
+</div>
+
+<div id="score">Score : 0</div>
+
+<script>
+const objets = [
+    {emoji:"📄", type:"papier"},
+    {emoji:"📰", type:"papier"},
+    {emoji:"🧴", type:"plastique"},
+    {emoji:"🧃", type:"plastique"},
+    {emoji:"🍾", type:"verre"},
+    {emoji:"🥫", type:"verre"},
+    {emoji:"🍌", type:"dechets"},
+    {emoji:"🧻", type:"dechets"}
+];
+
+let score = 0;
+let objetActuel;
+
+function nouvelObjet() {
+    objetActuel = objets[Math.floor(Math.random() * objets.length)];
+    document.getElementById("objet").textContent = objetActuel.emoji;
+}
+
+function verifier(reponse) {
+    if (reponse === objetActuel.type) {
+        score++;
+        alert("✅ Bien trié !");
+    } else {
+        alert("❌ Mauvais tri !");
+    }
+    document.getElementById("score").textContent = "Score : " + score;
+    nouvelObjet();
+}
+
+nouvelObjet();
+</script>
+
+</body>
+</html>
